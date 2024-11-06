@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) {
 
-
+        //se crea y se borra la tabla clientes
         try{
             DatabaseConfig.createTables();
 

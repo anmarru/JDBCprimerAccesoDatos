@@ -16,13 +16,36 @@ public class DatabaseConfig {
             "telefono VARCHAR(255) NULL UNIQUE"+
             ");";
 
+    public static final String CREATE_TABLE_COCHE= "CREATE TABLE COCHES ("+
+            "matricula VARCHAR(255) PRIMARY KEY,"+
+        "marca VARCHAR(255) NOT NULL,"+
+        "modelo VARCHAR(255) NOT NULL,"+
+        "fecha DATE NULL,"+
+        "propietario VARCHAR(255),"+
+        "FOREIGN KEY(propietario) REFERENCES CLIENTES(dni) ON DELETE NO ACTION ON UPDATE CASCADE);";
+
+    //INSERTAR CAMPOS A LA TABLA
+    public static final String INSERT_CLIENTE = "INSERT INTO CLIENTES (dni, nombre, apellidos, telefono) VALUES (?,?,?,?)";
+    public static final String INSERT_COCHE= "INSERT INTO COCHES (matricula, marca, modelo, fecha, propietario) VALUES (?, ?, ? ,?, ?)";
+
+
+    //ELIMINAR CAMPOS
+    public static final String DELETE_CLIENTE= "DELETE FROM CLIENTES WHERE dni=?";
+
+    //ACTUALIZAR TABLAS
+    public static final String UPDATE_CLIENTE= "UPDATE CLIENTES SET nombre = ?, apellidos = ? , telefono = ? WHERE dni= dni? ";
+
+    //ELIMINAR TABLAS
     private static final String DROP_TABLE_CLIENTE= "DROP TABLE cliente";
+    private static final String DROP_TABLE_COCHES= "DROP TABLE coches";
 
     public static void createTables() throws SQLException {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
              Statement stmt = conn.createStatement()) {
             stmt.execute(CREATE_TABLE_CLIENTE);
             System.out.println("Se ha creado la tabla clientes");
+            stmt.execute(CREATE_TABLE_COCHE);
+            System.out.println("Se ha creado la tabla coches");
         }
     }
 
@@ -31,9 +54,13 @@ public class DatabaseConfig {
              Statement stmt = conn.createStatement()) {
             stmt.execute(DROP_TABLE_CLIENTE);
             System.out.println("Se ha borrado la tabla clientes");
-            //createTables();
+            stmt.execute(DROP_TABLE_COCHES);
+            System.out.println("Se ha borrado la tabla coches");
+            createTables();
         }
     }
+
+
 
 
 }

@@ -1,4 +1,5 @@
 package controlador.dao;
 
-public class CocheDao {
+public interface CocheDao {
+
 }
