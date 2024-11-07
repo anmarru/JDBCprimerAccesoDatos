@@ -10,9 +10,10 @@ public interface  ClienteDao {
      void save(Cliente cliente) throws SQLException;
      void delete(Cliente cliente) throws SQLException;
 
-     void update(Cliente cliente);
+     void update(Cliente cliente) throws SQLException;
 
-     String findByDni(String dni);
+
+     //String findByDni(String dni);
 
 
 }
